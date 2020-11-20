@@ -18,8 +18,11 @@ import com.example.moviecatalogapp.databinding.FragmentOneBinding;
 import com.example.moviecatalogapp.modal.Movies;
 import com.example.moviecatalogapp.services.ApiClient;
 import com.example.moviecatalogapp.services.ApiService;
+import com.example.moviecatalogapp.viewmodal.FragmentOneViewModal;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -33,20 +36,27 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FragmentOne extends Fragment{
 
+    FragmentOneViewModal fragmentOneViewModal;
     FragmentOneBinding fragmentOneBinding;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    //SharedPreferences sharedPreferences;
+    //SharedPreferences.Editor editor;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        sharedPreferences = getContext().getSharedPreferences("MOVIES_LIST", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        //sharedPreferences = getContext().getSharedPreferences("MOVIES_LIST", Context.MODE_PRIVATE);
+        //editor = sharedPreferences.edit();
+        fragmentOneViewModal = new FragmentOneViewModal(getContext());
 
         fragmentOneBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_one, null, false);
-        View view = fragmentOneBinding.getRoot();
+
 
         fragmentOneBinding.recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        fragmentOneBinding.recyclerView.setAdapter(fragmentOneViewModal.setAdapter());
+
+        View view = fragmentOneBinding.getRoot();
+
+        /*
             ApiService apiService = ApiClient.getApiService();
             Observable<List<Movies>> call = apiService.getMoviesList().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
 
@@ -68,7 +78,7 @@ public class FragmentOne extends Fragment{
                 @Override
                 public void onComplete() {
                 }
-            });
+            });*/
 
 
         return view;
