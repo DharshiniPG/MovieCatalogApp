@@ -25,8 +25,8 @@ public class FragmentOne extends Fragment{
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //sharedPreferences = getContext().getSharedPreferences("MOVIES_LIST", Context.MODE_PRIVATE);
-        //editor = sharedPreferences.edit();
+        /*sharedPreferences = getContext().getSharedPreferences("MOVIES_LIST", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();*/
         fragmentOneViewModal = new FragmentOneViewModal(getContext());
 
         fragmentOneBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_one, null, false);
